@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page Scrollable</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+    }
+    .scroll-container {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="m-0 p-0 bg-gray-100 font-sans">
+
+  <div class="scroll-container">
+    
+    <!-- Sección 1 -->
+    <section id="inicio" class="bg-blue-500 text-white flex items-center justify-center text-center px-6">
+      <div class="fade-in">
+        <h1 class="text-5xl font-bold mb-4">Bienvenido</h1>
+        <p class="text-xl mb-6">Desliza para descubrir más</p>
+        <a href="#servicios" class="bg-white text-blue-500 px-4 py-2 rounded shadow hover:bg-gray-200">Explorar</a>
+      </div>
+    </section>
+
+    <!-- Sección 2 -->
+    <section id="servicios" class="bg-white text-gray-800 flex items-center justify-center text-center px-6">
+      <div class="fade-in">
+        <h2 class="text-4xl font-bold mb-4">Nuestros Servicios</h2>
+        <p class="text-lg">Diseño web, desarrollo de aplicaciones, branding y más.</p>
+      </div>
+    </section>
+
+    <!-- Sección 3 -->
+    <section id="contacto" class="bg-gray-900 text-white flex items-center justify-center text-center px-6">
+      <div class="fade-in">
+        <h2 class="text-4xl font-bold mb-4">Contáctanos</h2>
+        <p class="text-lg">¿Tienes un proyecto? ¡Hablemos!</p>
+        <a href="mailto:contacto@tusitio.com" class="mt-4 inline-block bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">Enviar correo</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Animación al hacer scroll (observador de intersección)
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    fadeIns.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
